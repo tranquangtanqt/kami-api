@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmAsyncConfigDatabase } from './config/typeorm.config';
-import { FileModule } from './module/file/file.module';
+import { PictureModule } from './module/picture/picture.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync(typeOrmAsyncConfigDatabase),
-    FileModule,
+    PictureModule,
   ],
 })
 export class AppModule {}

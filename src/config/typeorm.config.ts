@@ -19,9 +19,9 @@ const configDatabasePostgreSQL: any = {
   // synchronize: true,
   logging: DATABASE_CONFIG_POSTGRESQL.LOGGING,
   autoLoadEntities: true,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
 };
 
 const configDatabase: TypeOrmModuleOptions = configDatabasePostgreSQL;

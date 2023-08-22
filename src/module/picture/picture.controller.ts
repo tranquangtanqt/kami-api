@@ -16,33 +16,33 @@ import { ApiBody, ApiConsumes, ApiOperation } from '@nestjs/swagger';
 import { Response } from 'express';
 import { FileToBodyInterceptor } from 'src/share/common/interceptor/file-to-body.interceptor';
 import { FilesToBodyInterceptor } from 'src/share/common/interceptor/files-to-body.interceptor';
-import { CreateFileDto } from './dto/create-file.dto';
+import { CreatePictureDto } from './dto/create-picture.dto';
 import { CreateMultipleFilesDto } from './dto/create-multiple-files.dto';
-import { UpdateFileDto } from './dto/update-file.dto';
-import { FileService } from './file.service';
-import { PATH_URL_FILE_CONFIG } from 'src/config/constant.config';
+import { UpdatePictureDto } from './dto/update-picture.dto';
+import { PictureService } from './picture.service';
+import { CONST_URL } from 'src/share/constant/route.constant';
 
-@Controller(PATH_URL_FILE_CONFIG.URL_CONTROLLER)
-export class FileController {
-  constructor(private readonly fileService: FileService) {}
+@Controller(CONST_URL.URL_CONTROLLER)
+export class PictureController {
+  constructor(private readonly pictureService: PictureService) {}
 
-  @Get(PATH_URL_FILE_CONFIG.GET_IMAGE + PATH_URL_FILE_CONFIG.KEY)
+  @Get(CONST_URL.GET_IMAGE + CONST_URL.KEY)
   @ApiOperation({ summary: 'Get file by key' })
   async getImage(@Res() res: Response, @Param('key') key: string) {
-    return this.fileService.getImage(key, res);
+    return this.pictureService.getImage(key, res);
   }
 
-  @Post(PATH_URL_FILE_CONFIG.UPLOAD_FILE)
+  @Post(CONST_URL.UPLOAD_FILE)
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Uploads file and creates file details' })
-  @ApiBody({ type: CreateFileDto })
+  @ApiBody({ type: CreatePictureDto })
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'), FileToBodyInterceptor)
-  async uploadFile(@Body() createFileDto: CreateFileDto) {
-    return this.fileService.uploadFile(createFileDto);
+  async uploadFile(@Body() createFileDto: CreatePictureDto) {
+    return this.pictureService.uploadFile(createFileDto);
   }
 
-  @Post(PATH_URL_FILE_CONFIG.UPLOAD_MULTIPLE_FILES)
+  @Post(CONST_URL.UPLOAD_MULTIPLE_FILES)
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Uploads file and creates multiple files details' })
   @ApiConsumes('multipart/form-data')
@@ -51,38 +51,38 @@ export class FileController {
   async uploadMultipleFiles(
     @Body() createMultipleFilesDto: CreateMultipleFilesDto,
   ) {
-    return this.fileService.uploadMultipleFiles(createMultipleFilesDto);
+    return this.pictureService.uploadMultipleFiles(createMultipleFilesDto);
   }
 
-  @Get(PATH_URL_FILE_CONFIG.BACKUP_ALL_FILE)
+  @Get(CONST_URL.BACKUP_ALL_FILE)
   @ApiOperation({ summary: 'Backup all file server' })
   async backupAllFile() {
-    return this.fileService.backupAllFile();
+    return this.pictureService.backupAllFile();
   }
 
-  @Get(PATH_URL_FILE_CONFIG.RESTORE_ALL_FILE)
+  @Get(CONST_URL.RESTORE_ALL_FILE)
   @ApiOperation({ summary: 'Restore all file server' })
   async restoreAllFile() {
-    return this.fileService.restoreAllFile();
+    return this.pictureService.restoreAllFile();
   }
 
   @Get()
   findAll() {
-    return this.fileService.findAll();
+    return this.pictureService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.fileService.findOne(+id);
+    return this.pictureService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFileDto: UpdateFileDto) {
-    return this.fileService.update(+id, updateFileDto);
+  update(@Param('id') id: string, @Body() updateFileDto: UpdatePictureDto) {
+    return this.pictureService.update(+id, updateFileDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.fileService.remove(+id);
+    return this.pictureService.remove(+id);
   }
 }

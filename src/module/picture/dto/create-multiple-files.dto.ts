@@ -10,13 +10,4 @@ export class CreateMultipleFilesDto {
   @ApiProperty({ example: 'subfolder' })
   @IsNotEmpty()
   subfolder: string;
-
-  @ApiProperty({ example: 10 })
-  maxDownloads?: number;
-
-  @ApiProperty({ example: true })
-  autoDelete?: boolean;
-
-  @ApiProperty({ example: '2023-07-31T12:34:56Z' })
-  expires?: Date;
 }

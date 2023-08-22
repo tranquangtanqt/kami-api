@@ -33,13 +33,3 @@ export const LOG_CONFIG = {
 export const CORS_CONFIG = {
   ALLOWED_URL: CONFIG_ENV.CORS_ALLOWED_URL,
 };
-
-export const PATH_URL_FILE_CONFIG = {
-  URL_CONTROLLER: 'file',
-  KEY: '/:key',
-  GET_IMAGE: 'image',
-  UPLOAD_FILE: 'upload-file',
-  UPLOAD_MULTIPLE_FILES: 'upload-multiple-file',
-  BACKUP_ALL_FILE: 'backup',
-  RESTORE_ALL_FILE: 'restore',
-};
